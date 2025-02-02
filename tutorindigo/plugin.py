@@ -6,7 +6,8 @@ import typing as t
 
 import importlib_resources
 from tutor import hooks
-from tutormfe.hooks import PLUGIN_SLOTS
+from tutormfe.hooks import PLUGIN_SLOTS, MFE_APPS
+
 from tutor.__about__ import __version_suffix__
 
 from .__about__ import __version__
@@ -121,7 +122,10 @@ hooks.Filters.ENV_PATCHES.add_items(
            
 RUN npm install @edly-io/indigo-frontend-component-footer@^2.0.0
 RUN npm install '@edx/frontend-component-header@npm:@edly-io/indigo-frontend-component-header@^3.2.2'
-RUN npm install '@edx/brand@npm:@edly-io/indigo-brand-openedx@^2.2.2'
+RUN npm install https://github.com/African-Cities-Lab/brand-openedx#develop
+RUN npm install --save @fortawesome/react-fontawesome @fortawesome/free-brands-svg-icons
+
+
 
 """,
         )
@@ -219,3 +223,43 @@ for mfe in indigo_styled_mfes:
   """,
         ),
     )
+
+PLUGIN_SLOTS.add_items([
+    # Hide the default footer
+    (
+        "all",
+        "footer_slot",
+        """
+        {
+          op: PLUGIN_OPERATIONS.Hide,
+          widgetId: 'default_contents',
+        }"""
+    ),
+    # Insert a custom footer
+    (
+        "all",
+        "footer_slot",
+        """
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: 'custom_footer',
+            type: DIRECT_PLUGIN,
+            RenderWidget: () => <CustomFooter />
+          },
+        }"""
+    )
+])
+# @MFE_APPS.add()
+# def _remove_some_my_mfe(mfes):
+    # mfes.pop("authn")
+    # mfes.pop("learner-dashboard")
+    # mfes.pop("authoring")
+    # mfes.pop("profile")
+#     mfes.pop("discussions")
+#     mfes.pop("gradebook")
+#     mfes.pop("account")
+#     mfes.pop("communications")
+#     mfes.pop("ora-grading")
+    
+    # return mfes
