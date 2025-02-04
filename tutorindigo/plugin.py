@@ -123,8 +123,8 @@ hooks.Filters.ENV_PATCHES.add_items(
 RUN npm install @edly-io/indigo-frontend-component-footer@^2.0.0
 RUN npm install '@edx/frontend-component-header@npm:@edly-io/indigo-frontend-component-header@^3.2.2'
 RUN npm install '@edx/brand@git+https://github.com/African-Cities-Lab/brand-openedx.git#develop'
-RUN npm install --save @fortawesome/react-fontawesome @fortawesome/free-brands-svg-icons
-
+# RUN npm install --save @fortawesome/react-fontawesome @fortawesome/free-brands-svg-icons
+RUN npm install --save @fortawesome/fontawesome-free
 
 
 """,
@@ -252,14 +252,14 @@ PLUGIN_SLOTS.add_items([
 ])
 # @MFE_APPS.add()
 # def _remove_some_my_mfe(mfes):
-    # mfes.pop("authn")
-    # mfes.pop("learner-dashboard")
-    # mfes.pop("authoring")
-    # mfes.pop("profile")
+#     mfes.pop("authn")
+#     # mfes.pop("learner-dashboard")
+#     mfes.pop("authoring")
+#     mfes.pop("profile")
 #     mfes.pop("discussions")
 #     mfes.pop("gradebook")
 #     mfes.pop("account")
 #     mfes.pop("communications")
 #     mfes.pop("ora-grading")
     
-    # return mfes
+#     return mfes

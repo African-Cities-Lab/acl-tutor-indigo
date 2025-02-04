@@ -1,8 +1,10 @@
-const { default: IndigoFooter } = await import('@edly-io/indigo-frontend-component-footer');
+
+const { useState, useEffect } = await import ('react');
+const { FontAwesomeIcon: FAIcon }  = await import('@fortawesome/react-fontawesome');
+const { faTwitter, faLinkedin, faFacebook, faInstagram, faMedium, faYoutube } = await import('@fortawesome/free-brands-svg-icons');
 
 
-// const { FontAwesomeIcon: FAIcon } = await import('@fortawesome/react-fontawesome');
-// const { faTwitter, faLinkedin, faFacebook, faInstagram, faMedium, faYoutube } = await import('@fortawesome/free-brands-svg-icons');
+// const { default: IndigoFooter } = await import('@edly-io/indigo-frontend-component-footer');
 
 const footerStyle = { backgroundColor: '#3B424A', color: '#fff', padding: '25px 40px' };
 const containerStyle = { maxWidth: '1200px', width: '100%', margin: '0 auto' };
@@ -16,13 +18,14 @@ const linkListStyle = {
   marginBottom: '24px',
   flexWrap: 'wrap',
 };
-const linkStyle = { color: '#fff', fontWeight: '500', fontSize: '14px' };
+const linkStyle = { color: '#fff', fontWeight: '600', fontSize: '16px' };
 const footerBottomStyle = {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'flex-start',
   flexWrap: 'wrap',
 };
+const footerLink = {color: '#fff', fontSize: '28px' };
 const socialListStyle = {
   display: 'flex',
   marginTop: '0.4rem',
@@ -34,6 +37,17 @@ const socialListStyle = {
 };
 const copyrightStyle = { margin: '-2px 0 8px 0', fontSize: '0.6875em' };
 const CustomFooter = () => {
+  const [Icons, setIcons] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const { FontAwesomeIcon } = await import('@fortawesome/react-fontawesome');
+      const { faTwitter, faLinkedin, faFacebook, faInstagram, faMedium, faYoutube } = await import('@fortawesome/free-brands-svg-icons');
+      setIcons({ FontAwesomeIcon, faTwitter, faLinkedin, faFacebook, faInstagram, faMedium, faYoutube });
+    })();
+  }, []);
+
+  if (!Icons) return null;
   return (
     <footer style={footerStyle}>
       <div style={containerStyle}>
@@ -63,33 +77,33 @@ const CustomFooter = () => {
           <div>
             <ul style={socialListStyle}>
               <li>
-                <a href="https://twitter.com/AfricanCtiesLab">
-                {/* <i class="fa fa-twitter"></i> */}
+                <a style={footerLink} href="https://twitter.com/AfricanCtiesLab">
+                <Icons.FontAwesomeIcon icon={Icons.faTwitter} />
                 </a>
               </li>
               <li>
-                <a href="https://www.linkedin.com/company/african-cities-lab/?viewAsMember=true">
-                {/* <i class="fa fa-linkedin"></i> */}
+                <a style={footerLink} href="https://www.linkedin.com/company/african-cities-lab/?viewAsMember=true">
+                 <Icons.FontAwesomeIcon icon={Icons.faLinkedin} />
                 </a>
               </li>
               <li>
-                <a href="https://www.facebook.com/African-Cities-Lab-103073095772023">
-                {/* <i class="fa fa-facebook"></i> */}
+                <a style={footerLink} href="https://www.facebook.com/African-Cities-Lab-103073095772023">
+                  <Icons.FontAwesomeIcon icon={Icons.faFacebook} />
                 </a>
               </li>
               <li>
-                <a href="https://instagram.com/africancitieslab?igshid=YmMyMTA2M2Y=">
-                {/* <i class="fa fa-instagram"></i> */}
+                <a style={footerLink} href="https://instagram.com/africancitieslab?igshid=YmMyMTA2M2Y=">
+                  <Icons.FontAwesomeIcon icon={Icons.faInstagram} />
                 </a>
               </li>
               <li>
-                <a href="https://medium.com/@African_Cities_Lab">
-                {/* <i class="fa fa-medium"></i> */}
+                <a style={footerLink} href="https://medium.com/@African_Cities_Lab">
+                  <Icons.FontAwesomeIcon icon={Icons.faMedium} />
                 </a>
               </li>
               <li>
-                <a href="https://www.youtube.com/channel/UC22_61it3OdPBNj3CwkndUA">
-                {/* <i class="fa fa-youtube"></i> */}
+                <a style={footerLink} href="https://www.youtube.com/channel/UC22_61it3OdPBNj3CwkndUA">
+                  <Icons.FontAwesomeIcon icon={Icons.faYoutube} />
                 </a>
               </li>
             </ul>
@@ -111,115 +125,3 @@ const CustomFooter = () => {
     </footer>
   );
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const CustomFooter = () => (
-//     <footer >
-//       <div >
-//         <ul
-          
-//         >
-//           <li>
-//             <a
-              
-//               href="https://africancitieslab.org/fr/about/"
-//               target="_blank"
-//             >
-//               À propos
-//             </a>
-//           </li>
-//           <li>
-//             <a
-              
-//               href="https://africancitieslab.org/fr/contact/"
-//               target="_blank"
-//             >
-//               Contact
-//             </a>
-//           </li>
-//           <li>
-//             <a
-              
-//               href="https://africancitieslab.org/fr/terms-conditions/"
-//               target="_blank"
-//             >
-//               Termes &amp; Conditions
-//             </a>
-//           </li>
-//           <li>
-//             <a
-             
-//               href="https://africancitieslab.org/fr/gdpr/"
-//               target="_blank"
-//             >
-//               RGPD
-//             </a>
-//           </li>
-//         </ul>
-//         <div
-          
-//         >
-//           <div>
-//             <ul
-             
-//             >
-//               <li>
-//                 <a href="https://twitter.com/AfricanCtiesLab">
-//                   <i className="fa fa-twitter"></i>
-//                 </a>
-//               </li>
-//               <li>
-//                 <a href="https://www.linkedin.com/company/african-cities-lab/?viewAsMember=true">
-//                   <i className="fa fa-linkedin"></i>
-//                 </a>
-//               </li>
-//               <li>
-//                 <a href="https://www.facebook.com/African-Cities-Lab-103073095772023">
-//                   <i className="fa fa-facebook"></i>
-//                 </a>
-//               </li>
-//               <li>
-//                 <a href="https://instagram.com/africancitieslab?igshid=YmMyMTA2M2Y=">
-//                   <i className="fa fa-instagram"></i>
-//                 </a>
-//               </li>
-//               <li>
-//                 <a href="https://medium.com/@African_Cities_Lab">
-//                   <i className="fa fa-medium"></i>
-//                 </a>
-//               </li>
-//               <li>
-//                 <a href="https://www.youtube.com/channel/UC22_61it3OdPBNj3CwkndUA">
-//                   <i className="fa fa-youtube"></i>
-//                 </a>
-//               </li>
-//             </ul>
-//             <p >
-//               © Copyright 2022 African Cities Lab. All rights reserved.
-//             </p>
-//           </div>
-//           <div>
-//             <a href="/">
-//               <img
-//                 src="https://courses.africancitieslab.org/static/acl-indigo-theme/images/logo-white.b6ca87ee4223.png"
-//                 alt="African Cities Lab"
-//                 width="175"
-//               />
-//             </a>
-//           </div>
-//         </div>
-//       </div>
-//     </footer>
-//   );
