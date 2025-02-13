@@ -1695,6 +1695,21 @@ body.indigo-dark-theme {
   } 
 
 }
+// instructor .dashboard
+body.view-in-course.view-instructordash .enrollment-button, body.view-in-course.view-instructordash input[type=button], body.view-in-course.view-instructordash button.btn {
+  background-color: $primary !important;
+  color: #fff !important;
+  padding: 8px 20px !important;
+  // font-size: 16px !important;
+  // font-weight: 600 !important;
+  &:hover{
+     background: transparent !important;
+     color: $primary !important;
+     border: 2px solid $primary !important;
+  }
+ }
+
+
 @import '../../../extra/footer';
 @import '../../../extra/header';
 @import '../../../dashboard/dashboard';
