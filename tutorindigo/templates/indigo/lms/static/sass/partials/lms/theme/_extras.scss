@@ -1708,8 +1708,92 @@ body.view-in-course.view-instructordash .enrollment-button, body.view-in-course.
      border: 2px solid $primary !important;
   }
  }
+ .btn-blue{
+ background-color: $primary !important;
+    border-color: $primary !important;
+    border-radius: 6px !important;
+    box-shadow: inset 0 1px 0 0 $primary!important;
+    background-image: linear-gradient($primary, $primary) !important;
+    color: #fff !important;
+    border: 2px solid transparent !important;
+    &:hover,
+    &:focus {
+      background-color: transparent !important;
+      border-color: $primary !important;
+      box-shadow: inset 0 1px 0 0 transparent !important;
+      background-image: linear-gradient(transparent, transparent) !important;
+      color: $primary !important;
+      border: 2px solid $primary!important;
+    }
+  }
 
-
+  .link-to-group-settings, .gradebook-link, .enrollment-status-link, .progress-link{
+    color: $primary !important;
+    &:hover{
+      color: #111827 !important;
+    }
+  }
+  //xblcoks styling
+  .submit-attempt-container .submit{
+    background-color: $primary !important;
+    color: #fff !important;
+    padding: 8px 20px !important;
+    font-size: 16px !important;
+    border: 2px solid transparent !important;
+    font-weight: 600 !important;
+    &:hover{
+       background: transparent !important;
+       color: $primary !important;
+       border: 2px solid $primary !important;
+    }
+}
+.submit{
+  background-color: $primary !important;
+  color: #fff !important;
+  padding: 8px 20px !important;
+  font-size: 16px !important;
+  border: 2px solid transparent !important;
+  font-weight: 600 !important;
+  &:hover{
+     background: transparent !important;
+     color: $primary !important;
+     border: 2px solid $primary !important;
+  }
+}
+.hint-button {
+  &.problem-action-btn{
+    color: $primary !important;
+    }
+}
+.problem-action-btn{
+  color: $primary !important;
+  span{
+    color: $primary !important;
+  }
+  }
+  .openassessment .list--actions .action--submit{
+    background-color: $primary !important;
+    color: #fff !important;
+    padding: 8px 20px !important;
+    font-size: 16px !important;
+    border: 2px solid transparent !important;
+    font-weight: 600 !important;
+    &:hover{
+       background: transparent !important;
+       color: $primary !important;
+       border: 2px solid $primary !important;
+    }
+  }
+  .openassessment .openassessment__steps__step.is--in-progress .step__status__value{
+    background-color: $primary !important;
+  }
+  .openassessment .is--in-progress.openassessment__steps__step{
+    border-top-color: $primary !important;
+  }
+//allpages acl over ride
+input[type="checkbox"], input[type="radio"]{
+    accent-color: $primary !important; 
+  }
 @import '../../../extra/footer';
 @import '../../../extra/header';
 @import '../../../dashboard/dashboard';
