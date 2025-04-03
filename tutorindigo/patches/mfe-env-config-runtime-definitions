@@ -1,6 +1,7 @@
 
 const { useState, useEffect } = await import ('react');
 const { FontAwesomeIcon: FAIcon }  = await import('@fortawesome/react-fontawesome');
+const { getConfig } = await import ('@edx/frontend-platform');
 const { faTwitter, faLinkedin, faFacebook, faInstagram, faMedium, faYoutube } = await import('@fortawesome/free-brands-svg-icons');
 
 
@@ -114,7 +115,7 @@ const CustomFooter = () => {
           <div>
             <a href="/">
               <img
-                src="https://courses.africancitieslab.org/static/acl-indigo-theme/images/logo-white.b6ca87ee4223.png"
+                src="{`${config.LMS_BASE_URL}/theming/asset/images/logo-white.png"
                 alt="African Cities Lab"
                 width="175"
               />
