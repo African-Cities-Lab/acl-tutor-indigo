@@ -115,7 +115,7 @@ const CustomFooter = () => {
           <div>
             <a href="/">
               <img
-                src="{`${config.LMS_BASE_URL}/theming/asset/images/logo-white.png"
+                src={`${getConfig().LMS_BASE_URL}/theming/asset/images/logo-white.png`}
                 alt="African Cities Lab"
                 width="175"
               />
