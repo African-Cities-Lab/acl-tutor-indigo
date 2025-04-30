@@ -119,8 +119,9 @@ hooks.Filters.ENV_PATCHES.add_items(
         (
             f"mfe-dockerfile-post-npm-install-{mfe}",
             """
+RUN npm install @edx/frontend-plugin-notifications@^1.2.0         
 RUN npm install @edly-io/indigo-frontend-component-footer@^2.0.0
-RUN npm install '@edx/frontend-component-header@npm:@edly-io/indigo-frontend-component-header@^3.2.2'
+# RUN npm install '@edx/frontend-component-header@npm:@edly-io/indigo-frontend-component-header@^3.2.2'
 RUN npm install '@edx/brand@git+https://github.com/African-Cities-Lab/brand-openedx.git#develop'
 # RUN npm install --save @fortawesome/react-fontawesome @fortawesome/free-brands-svg-icons
 RUN npm install --save @fortawesome/fontawesome-free
@@ -191,37 +192,37 @@ for path in glob(
         hooks.Filters.ENV_PATCHES.add_item((os.path.basename(path), patch_file.read()))
 
 
-for mfe in indigo_styled_mfes:
-    PLUGIN_SLOTS.add_item(
-        (
-            mfe,
-            "footer_slot",
-            """ 
-            {
-                op: PLUGIN_OPERATIONS.Hide,
-                widgetId: 'default_contents',
-            },
-            {
-                op: PLUGIN_OPERATIONS.Insert,
-                widget: {
-                    id: 'default_contents',
-                    type: DIRECT_PLUGIN,
-                    priority: 1,
-                    RenderWidget: <IndigoFooter />,
-                },
-            },
-            {
-                op: PLUGIN_OPERATIONS.Insert,
-                widget: {
-                    id: 'read_theme_cookie',
-                    type: DIRECT_PLUGIN,
-                    priority: 2,
-                    RenderWidget: AddDarkTheme,
-                },
-            },
-  """,
-        ),
-    )
+# for mfe in indigo_styled_mfes:
+#     PLUGIN_SLOTS.add_item(
+#         (
+#             mfe,
+#             "footer_slot",
+#             """ 
+#             {
+#                 op: PLUGIN_OPERATIONS.Hide,
+#                 widgetId: 'default_contents',
+#             },
+#             {
+#                 op: PLUGIN_OPERATIONS.Insert,
+#                 widget: {
+#                     id: 'default_contents',
+#                     type: DIRECT_PLUGIN,
+#                     priority: 1,
+#                     RenderWidget: <IndigoFooter />,
+#                 },
+#             },
+#             {
+#                 op: PLUGIN_OPERATIONS.Insert,
+#                 widget: {
+#                     id: 'read_theme_cookie',
+#                     type: DIRECT_PLUGIN,
+#                     priority: 2,
+#                     RenderWidget: AddDarkTheme,
+#                 },
+#             },
+#   """,
+#         ),
+#     )
 
 PLUGIN_SLOTS.add_items([
     # Hide the default footer
@@ -250,6 +251,61 @@ PLUGIN_SLOTS.add_items([
     )
 ])
 
+
+PLUGIN_SLOTS.add_items([
+    # Hide the default footer
+    (
+        "all",
+        "desktop_secondary_menu_slot",
+        """
+        {
+          op: PLUGIN_OPERATIONS.Hide,
+          widgetId: 'default_contents',
+        }"""
+    ),
+    # Insert a custom footer
+    (
+        "all",
+        "desktop_secondary_menu_slot",
+        """
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: 'notification_tray_all',
+            type: DIRECT_PLUGIN,
+            RenderWidget: () => {return <NotificationsTray/>},
+          },
+        }"""
+    )
+])
+PLUGIN_SLOTS.add_items([
+    # Hide the default footer
+    (
+        "learning",
+        "learning_help_slot",
+        """
+        {
+          op: PLUGIN_OPERATIONS.Hide,
+          widgetId: 'default_contents',
+        }"""
+    ),
+    # Insert a custom footer
+    (
+        "learning",
+        "learning_help_slot",
+        """
+        {
+          op: PLUGIN_OPERATIONS.Insert,
+          widget: {
+            id: 'notification_tray_learning',
+            type: DIRECT_PLUGIN,
+            RenderWidget: () => {return <NotificationsTray/>},
+          },
+        }"""
+    )
+])
+
+
 # @MFE_APPS.add()
 # def _remove_some_my_mfe(mfes):
 #     mfes.pop("authn")
@@ -258,7 +314,7 @@ PLUGIN_SLOTS.add_items([
 #     mfes.pop("profile")
 #     mfes.pop("discussions")
 #     mfes.pop("gradebook")
-#     mfes.pop("account")
+#     # mfes.pop("account")
 #     mfes.pop("communications")
 #     mfes.pop("ora-grading")
     
