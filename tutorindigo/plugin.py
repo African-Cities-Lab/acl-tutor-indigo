@@ -113,7 +113,13 @@ indigo_styled_mfes = [
     "account",
     "discussions",
 ]
-
+not_indigo_styled_mfes = [
+    "authn", 
+    "gradebook",
+    "communications",
+    "ora-grading",
+    "authoring"
+]
 hooks.Filters.ENV_PATCHES.add_items(
     [
         (
@@ -132,6 +138,18 @@ RUN npm install --save @fortawesome/fontawesome-free
         for mfe in indigo_styled_mfes
     ]
 )
+hooks.Filters.ENV_PATCHES.add_items(
+    [
+        (
+            f"mfe-dockerfile-post-npm-install-{mfe}",
+            """
+RUN npm install @edx/frontend-plugin-notifications@^1.2.0 
+""",
+        )
+        for mfe in not_indigo_styled_mfes
+    ]
+)
+
 
 
 hooks.Filters.ENV_PATCHES.add_item(
@@ -309,13 +327,14 @@ PLUGIN_SLOTS.add_items([
 # @MFE_APPS.add()
 # def _remove_some_my_mfe(mfes):
 #     mfes.pop("authn")
-#     # mfes.pop("learner-dashboard")
+#     mfes.pop("learner-dashboard")
 #     mfes.pop("authoring")
 #     mfes.pop("profile")
 #     mfes.pop("discussions")
 #     mfes.pop("gradebook")
-#     # mfes.pop("account")
+#     mfes.pop("account")
+#     mfes.pop("learning")
 #     mfes.pop("communications")
-#     mfes.pop("ora-grading")
+#     # mfes.pop("ora-grading")
     
 #     return mfes
