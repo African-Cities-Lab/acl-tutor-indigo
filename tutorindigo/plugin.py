@@ -118,7 +118,8 @@ not_indigo_styled_mfes = [
     "gradebook",
     "communications",
     "ora-grading",
-    "authoring"
+    "authoring",
+    "survey"
 ]
 hooks.Filters.ENV_PATCHES.add_items(
     [
