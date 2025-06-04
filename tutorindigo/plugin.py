@@ -120,35 +120,40 @@ not_indigo_styled_mfes = [
     "ora-grading",
     "authoring"
 ]
-hooks.Filters.ENV_PATCHES.add_items(
-    [
-        (
-            f"mfe-dockerfile-post-npm-install-{mfe}",
-            """
+for mfe in indigo_styled_mfes:
+    hooks.Filters.ENV_PATCHES.add_items(
+        [
+            (
+                f"mfe-dockerfile-post-npm-install-{mfe}",
+                """
 RUN npm install @edx/frontend-plugin-notifications@^1.2.1       
 RUN npm install @edly-io/indigo-frontend-component-footer@^2.0.0
 # RUN npm install '@edx/frontend-component-header@npm:@edly-io/indigo-frontend-component-header@^3.2.2'
 RUN npm install '@edx/brand@git+https://github.com/African-Cities-Lab/brand-openedx.git#develop'
 # RUN npm install --save @fortawesome/react-fontawesome @fortawesome/free-brands-svg-icons
 RUN npm install --save @fortawesome/fontawesome-free
-
-
 """,
-        )
-        for mfe in indigo_styled_mfes
-    ]
-)
-hooks.Filters.ENV_PATCHES.add_items(
-    [
-        (
-            f"mfe-dockerfile-post-npm-install-{mfe}",
-            """
-RUN npm install @edx/frontend-plugin-notifications@^1.2.1
+            ),
+            (
+                f"mfe-env-config-buildtime-imports-{mfe}",
+                """
+import NotificationsTray from '@edx/frontend-plugin-notifications';
 """,
-        )
-        for mfe in not_indigo_styled_mfes
-    ]
-)
+            ),
+        ]
+    )
+
+# hooks.Filters.ENV_PATCHES.add_items(
+#     [
+#         (
+#             f"mfe-dockerfile-post-npm-install-{mfe}",
+#             """
+# RUN npm install @edx/frontend-plugin-notifications@^1.2.1
+# """,
+#         )
+#         for mfe in not_indigo_styled_mfes
+#     ]
+# )
 
 
 
