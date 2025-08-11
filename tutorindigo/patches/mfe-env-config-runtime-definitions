@@ -3,7 +3,9 @@ const { useState, useEffect } = await import ('react');
 const { FontAwesomeIcon: FAIcon }  = await import('@fortawesome/react-fontawesome');
 const { getConfig } = await import ('@edx/frontend-platform');
 const { faTwitter, faLinkedin, faFacebook, faInstagram, faMedium, faYoutube } = await import('@fortawesome/free-brands-svg-icons');
-
+const { getAuthenticatedHttpClient } = await import(
+  "@edx/frontend-platform/auth"
+);
 
 // const { default: IndigoFooter } = await import('@edly-io/indigo-frontend-component-footer');
 
@@ -126,3 +128,30 @@ const CustomFooter = () => {
     </footer>
   );
 };
+
+const MfeLinkSlot = () => {
+  const [isAllowed, setIsAllowed] = useState(false);
+  const apiUrl = `${getConfig().LMS_BASE_URL}/api/`;
+  const SURVEY_MFE_URL = `https://${getConfig().BASE_URL}/survey/`;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responses = await getAuthenticatedHttpClient().get(
+          apiUrl + 'allowed/'
+        )
+        setIsAllowed(responses.data.is_allowed);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, [])
+  return (
+    <>
+      {isAllowed
+        ? <a href={SURVEY_MFE_URL}>Data MFE</a>
+        : <></>
+      }
+    </>
+  )
+}
