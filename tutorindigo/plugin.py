@@ -295,19 +295,6 @@ PLUGIN_SLOTS.add_items([
             RenderWidget: () => {return <NotificationsTray/>},
           },
         }"""
-    ),
-    (
-        "all",
-        "desktop_secondary_menu_slot",
-        """
-        {
-          op: PLUGIN_OPERATIONS.Insert,
-          widget: {
-            id: 'forms_data_tab',
-            type: DIRECT_PLUGIN,
-            RenderWidget: () => {return <MfeLinkSlot/>},
-          },
-        }"""
     )
 
 ])
