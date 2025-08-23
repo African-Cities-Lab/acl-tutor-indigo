@@ -118,6 +118,7 @@ not_indigo_styled_mfes = [
     "gradebook",
     "communications",
     "ora-grading",
+    "survey",
     "authoring"
 ]
 hooks.Filters.ENV_PATCHES.add_items(
@@ -295,6 +296,7 @@ PLUGIN_SLOTS.add_items([
           },
         }"""
     )
+
 ])
 PLUGIN_SLOTS.add_items([
     # Hide the default footer
@@ -326,8 +328,8 @@ PLUGIN_SLOTS.add_items([
 
 # @MFE_APPS.add()
 # def _remove_some_my_mfe(mfes):
-#     mfes.pop("authn")
-#     mfes.pop("learner-dashboard")
+#     # mfes.pop("authn")
+#     # mfes.pop("learner-dashboard")
 #     mfes.pop("authoring")
 #     mfes.pop("profile")
 #     mfes.pop("discussions")
@@ -335,6 +337,6 @@ PLUGIN_SLOTS.add_items([
 #     mfes.pop("account")
 #     mfes.pop("learning")
 #     mfes.pop("communications")
-#     # mfes.pop("ora-grading")
+#     mfes.pop("ora-grading")
     
 #     return mfes
